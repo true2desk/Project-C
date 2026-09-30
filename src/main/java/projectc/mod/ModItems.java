@@ -6,6 +6,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.minecraft.world.item.CreativeModeTabs;
 
 public class ModItems {
 
@@ -35,5 +37,7 @@ public class ModItems {
     }
 
     public static void initialize() {
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS)
+                .register(creativeTab -> creativeTab.accept(FLINT_SHARD));
     }
 }
