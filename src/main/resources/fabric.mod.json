@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "project-c",
+	"version": "${version}",
+	"name": "Project C",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/project-c/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"projectc.mod.ProjectC"
+		],
+		"client": [
+			"projectc.mod.client.ProjectCClient"
+		],
+		"fabric-datagen": [
+			"projectc.mod.client.ProjectCDataGenerator"
+		]
+	},
+	"mixins": [
+		"project-c.mixins.json",
+		{
+			"config": "project-c.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
