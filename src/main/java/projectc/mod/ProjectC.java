@@ -22,6 +22,8 @@ public class ProjectC implements ModInitializer {
 		// Proceed with mild caution.
 
 		LOGGER.info("Hello Fabric world!");
+
+		ModItems.initialize();
 	}
 
 	public static Identifier id(String path) {
