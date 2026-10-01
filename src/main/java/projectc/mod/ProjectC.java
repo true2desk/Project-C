@@ -9,6 +9,9 @@ import org.slf4j.LoggerFactory;
 
 import projectc.mod.civilization.CivCommands;
 import projectc.mod.civilization.CivilizationServer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import projectc.mod.world.WorldConfiguration;
+import projectc.mod.resource.ModEntityTypes;
 
 public class ProjectC implements ModInitializer {
 	public static final String MOD_ID = "project-c";
@@ -30,6 +33,11 @@ public class ProjectC implements ModInitializer {
 		ModBlocks.initialize();
 		CivCommands.initialize();
 		CivilizationServer.initialize();
+		ModEntityTypes.initialize();
+
+		ServerLifecycleEvents.SERVER_STARTED.register(
+				WorldConfiguration::initialize
+		);
 	}
 
 	public static Identifier id(String path) {

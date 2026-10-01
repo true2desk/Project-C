@@ -21,10 +21,12 @@
 		"client": [
 			"projectc.mod.client.ProjectCClient"
 		],
+
 		"fabric-datagen": [
 			"projectc.mod.client.ProjectCDataGenerator"
 		]
 	},
+
 	"mixins": [
 		"project-c.mixins.json",
 		{
