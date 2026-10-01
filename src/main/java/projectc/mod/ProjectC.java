@@ -7,6 +7,9 @@ import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import projectc.mod.civilization.CivCommands;
+import projectc.mod.civilization.CivilizationServer;
+
 public class ProjectC implements ModInitializer {
 	public static final String MOD_ID = "project-c";
 
@@ -25,6 +28,8 @@ public class ProjectC implements ModInitializer {
 
 		ModItems.initialize();
 		ModBlocks.initialize();
+		CivCommands.initialize();
+		CivilizationServer.initialize();
 	}
 
 	public static Identifier id(String path) {
