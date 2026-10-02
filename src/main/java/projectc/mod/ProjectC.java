@@ -3,6 +3,11 @@ package projectc.mod;
 import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.resources.Identifier;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.core.BlockPos;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +17,8 @@ import projectc.mod.civilization.CivilizationServer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import projectc.mod.world.WorldConfiguration;
 import projectc.mod.resource.ModEntityTypes;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import projectc.mod.resource.LooseStickEntity;
 
 public class ProjectC implements ModInitializer {
 	public static final String MOD_ID = "project-c";
@@ -38,6 +45,58 @@ public class ProjectC implements ModInitializer {
 		ServerLifecycleEvents.SERVER_STARTED.register(
 				WorldConfiguration::initialize
 		);
+
+		UseBlockCallback.EVENT.register((player, level, hand, hitResult) -> {
+			if (!player.getItemInHand(hand).is(Items.STICK)) {
+				return InteractionResult.PASS;
+			}
+			if (hitResult.getDirection() != Direction.UP) {
+				return InteractionResult.PASS;
+			}
+			if (level.getBlockState(hitResult.getBlockPos()).getCollisionShape(level, hitResult.getBlockPos()).isEmpty()) {
+				return InteractionResult.PASS;
+			}
+
+			if (!level.isClientSide()) {
+				if (!level.getEntitiesOfClass(
+						LooseStickEntity.class,
+						new AABB(
+								hitResult.getBlockPos().getX(),
+								hitResult.getBlockPos().getY() + 0.5,
+								hitResult.getBlockPos().getZ(),
+								hitResult.getBlockPos().getX() + 1,
+								hitResult.getBlockPos().getY() + 1.5,
+								hitResult.getBlockPos().getZ() + 1
+						)
+				).isEmpty()) {
+					return InteractionResult.FAIL;
+				}
+
+				LooseStickEntity looseStick = new LooseStickEntity(
+						ModEntityTypes.LOOSE_STICK,
+						level
+				);
+
+				BlockPos blockPos = hitResult.getBlockPos();
+
+				looseStick.setPos(
+						blockPos.getX() + 0.5,
+						blockPos.getY() + 1.0,
+						blockPos.getZ() + 0.5
+				);
+
+				looseStick.setYRot(level.getRandom().nextFloat() * 360.0F);
+
+				level.addFreshEntity(looseStick);
+
+				if (!player.getAbilities().instabuild) {
+					player.getItemInHand(hand).shrink(1);
+				}
+			}
+
+			return InteractionResult.SUCCESS;
+		});
+
 	}
 
 	public static Identifier id(String path) {

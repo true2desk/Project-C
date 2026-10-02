@@ -1,0 +1,53 @@
+{
+	"format_version": "26.3",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "project-c:block/loose_stick",
+		"particle": "project-c:block/loose_stick"
+	},
+	"elements": [
+		{
+			"name": "stick",
+			"from": [7.5, 0, 0],
+			"to": [8.5, 1, 12],
+			"rotation": {"x": 0, "y": 8, "z": 3, "origin": [5, 0, 0]},
+			"faces": {
+				"north": {"uv": [1, 1, 2, 2], "texture": "#0"},
+				"east": {"uv": [4, 1, 16, 2], "texture": "#0"},
+				"south": {"uv": [0, 1, 1, 2], "texture": "#0"},
+				"west": {"uv": [0, 1, 12, 2], "texture": "#0"},
+				"up": {"uv": [0, 0, 1, 12], "texture": "#0"},
+				"down": {"uv": [0, 4, 1, 16], "texture": "#0"}
+			}
+		},
+		{
+			"name": "stick_tip",
+			"from": [9.25, 0.2, 11.85],
+			"to": [10.05, 1, 15.85],
+			"rotation": {"x": 0, "y": 8, "z": 3, "origin": [6.65, 0.1, 11.85]},
+			"faces": {
+				"north": {"uv": [1.1, 1.1, 1.9, 1.9], "texture": "#0"},
+				"east": {"uv": [12, 1.1, 16, 1.9], "texture": "#0"},
+				"south": {"uv": [0.1, 1.1, 0.9, 1.9], "texture": "#0"},
+				"west": {"uv": [0, 1.1, 4, 1.9], "texture": "#0"},
+				"up": {"uv": [0.1, 0, 0.9, 4], "texture": "#0"},
+				"down": {"uv": [0.1, 12, 0.9, 16], "texture": "#0"}
+			}
+		},
+		{
+			"name": "stick_branch",
+			"from": [8.95, 0.2, 7.85],
+			"to": [9.75, 1, 13.85],
+			"rotation": {"x": 0, "y": 48, "z": 3, "origin": [6.35, 0.1, 7.85]},
+			"faces": {
+				"north": {"uv": [1.1, 1.1, 1.9, 1.9], "texture": "#0"},
+				"east": {"uv": [10, 1.1, 16, 1.9], "texture": "#0"},
+				"south": {"uv": [0.1, 1.1, 0.9, 1.9], "texture": "#0"},
+				"west": {"uv": [0, 1.1, 6, 1.9], "texture": "#0"},
+				"up": {"uv": [0.1, 0, 0.9, 6], "texture": "#0"},
+				"down": {"uv": [0.1, 10, 0.9, 16], "texture": "#0"}
+			}
+		}
+	],
+	"display": {}
+}
