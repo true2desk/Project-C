@@ -15,7 +15,7 @@ public class ModEntityTypes {
                                     LooseStickEntity::new,
                                     MobCategory.MISC
                             )
-                            .sized(1.0f, 0.25f)
+                            .sized(0.25f, 0.25f)
                             .clientTrackingRange(4)
                             .updateInterval(10)
             );

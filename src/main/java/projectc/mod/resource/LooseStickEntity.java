@@ -12,6 +12,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
 public class LooseStickEntity extends Entity {
 
@@ -47,6 +50,36 @@ public class LooseStickEntity extends Entity {
     @Override
     protected void addAdditionalSaveData(ValueOutput output) {
 
+    }
+
+    @Override
+    protected AABB makeBoundingBox(Vec3 position) {
+        double localWidth = 2.55 / 16.0;
+        double localLength = 15.85 / 16.0;
+
+        double angle = Math.toRadians(getYRot());
+        double cos = Math.abs(Math.cos(angle));
+        double sin = Math.abs(Math.sin(angle));
+
+        double widthX = localWidth * cos + localLength * sin;
+        double widthZ = localWidth * sin + localLength * cos;
+
+        double modelCenterX = (6.275 / 16.0) - 0.5;
+        double modelCenterZ = (7.925 / 16.0) - 0.5;
+
+        double offsetX = modelCenterX * Math.cos(angle) + modelCenterZ * Math.sin(angle);
+        double offsetZ = -modelCenterX * Math.sin(angle) + modelCenterZ * Math.cos(angle);
+
+        Vec3 center = position.add(offsetX, 0.0, offsetZ);
+
+        return new AABB(
+                center.x - widthX / 2.0,
+                position.y,
+                center.z - widthZ / 2.0,
+                center.x + widthX / 2.0,
+                position.y + 1.0 / 16.0,
+                center.z + widthZ / 2.0
+        );
     }
 
 }
