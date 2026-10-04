@@ -5,7 +5,7 @@ import net.minecraft.references.BlockItemId;
 
 public class ModBlockItemIds {
 
-    public static final BlockItemId FLINT_BLOCK = create("flint_block");
+    public static final BlockItemId LOOSE_STONE = create("loose_stone");
 
     private static BlockItemId create(String name) {
         Identifier id = ProjectC.id(name);

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "project-c:block/flint_block"
+    "model": "project-c:block/loose_stone"
   }
 }

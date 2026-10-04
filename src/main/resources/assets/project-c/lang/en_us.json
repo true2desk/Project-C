@@ -1,5 +1,6 @@
 {
   "item.project-c.flint_shard": "Flint Shard",
   "block.project-c.flint_block": "Flint Block",
-  "item.project-c.rock": "Rock"
+  "item.project-c.rock": "Rock",
+  "block.project-c.loose_stone": "Loose Stone"
 }

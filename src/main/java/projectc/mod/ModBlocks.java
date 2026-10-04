@@ -13,9 +13,9 @@ import java.util.function.Function;
 
 public class ModBlocks {
 
-    public static final Block FLINT_BLOCK = register(
-            ModBlockItemIds.FLINT_BLOCK,
-            Block::new,
+    public static final Block loose_stone = register(
+            ModBlockItemIds.LOOSE_STONE,
+            LooseStoneBlock::new,
             Block.Properties.of()
     );
 
@@ -64,6 +64,6 @@ public class ModBlocks {
 
     public static void initialize() {
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.BUILDING_BLOCKS)
-                .register(creativeTab -> creativeTab.accept(FLINT_BLOCK));
+                .register(creativeTab -> creativeTab.accept(loose_stone));
     }
 }

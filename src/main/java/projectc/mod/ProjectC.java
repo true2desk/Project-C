@@ -1,10 +1,10 @@
 package projectc.mod;
 
 import net.fabricmc.api.ModInitializer;
-
 import net.minecraft.resources.Identifier;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.core.BlockPos;
@@ -18,22 +18,16 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import projectc.mod.world.WorldConfiguration;
 import projectc.mod.resource.ModEntityTypes;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import projectc.mod.resource.LooseStickEntity;
 
 public class ProjectC implements ModInitializer {
 	public static final String MOD_ID = "project-c";
 
-	// This logger is used to write text to the console and the log file.
-	// It is considered best practice to use your mod id as the logger's name.
-	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	@Override
 	public void onInitialize() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
-
 		LOGGER.info("Hello Fabric world!");
 
 		ModItems.initialize();
@@ -46,14 +40,83 @@ public class ProjectC implements ModInitializer {
 				WorldConfiguration::initialize
 		);
 
-		UseBlockCallback.EVENT.register((player, level, hand, hitResult) -> {
-			if (!player.getItemInHand(hand).is(Items.STICK)) {
+		AttackBlockCallback.EVENT.register((player, level, hand, pos, direction) -> {
+			if (!level.getBlockState(pos).is(ModBlocks.loose_stone)) {
 				return InteractionResult.PASS;
 			}
+
+			if (!level.isClientSide()) {
+				ItemStack rock = new ItemStack(ModItems.ROCK);
+
+				if (!player.getAbilities().instabuild) {
+					if (!player.getInventory().add(rock)) {
+						level.addFreshEntity(
+								new net.minecraft.world.entity.item.ItemEntity(
+										level,
+										player.getX(),
+										player.getY() + 0.5,
+										player.getZ(),
+										rock
+								)
+						);
+					}
+				}
+
+				level.removeBlock(pos, false);
+			}
+
+			return InteractionResult.SUCCESS;
+		});
+
+		UseBlockCallback.EVENT.register((player, level, hand, hitResult) -> {
+			ItemStack heldItem = player.getItemInHand(hand);
+
+			if (heldItem.is(ModItems.ROCK)) {
+				BlockPos placePos = hitResult.getBlockPos().relative(hitResult.getDirection());
+				BlockPos supportPos = placePos.below();
+
+				if (!level.getBlockState(supportPos).isFaceSturdy(
+						level,
+						supportPos,
+						Direction.UP
+				)) {
+					return InteractionResult.FAIL;
+				}
+
+				if (!level.getBlockState(placePos).isAir()) {
+					return InteractionResult.FAIL;
+				}
+
+				if (!level.isClientSide()) {
+					level.setBlock(
+							placePos,
+							ModBlocks.loose_stone.defaultBlockState().setValue(
+									LooseStoneBlock.POSITION,
+									LooseStonePosition.values()[level.getRandom().nextInt(5)]
+							),
+							3
+					);
+
+					if (!player.getAbilities().instabuild) {
+						heldItem.shrink(1);
+					}
+				}
+
+				return InteractionResult.SUCCESS;
+			}
+
+			if (!heldItem.is(Items.STICK)) {
+				return InteractionResult.PASS;
+			}
+
 			if (hitResult.getDirection() != Direction.UP) {
 				return InteractionResult.PASS;
 			}
-			if (level.getBlockState(hitResult.getBlockPos()).getCollisionShape(level, hitResult.getBlockPos()).isEmpty()) {
+
+			if (level.getBlockState(hitResult.getBlockPos()).getCollisionShape(
+					level,
+					hitResult.getBlockPos()
+			).isEmpty()) {
 				return InteractionResult.PASS;
 			}
 
@@ -96,7 +159,6 @@ public class ProjectC implements ModInitializer {
 
 			return InteractionResult.SUCCESS;
 		});
-
 	}
 
 	public static Identifier id(String path) {
