@@ -11,8 +11,8 @@ import net.minecraft.world.item.CreativeModeTabs;
 
 public class ModItems {
 
-    public static final Item FLINT_SHARD = register(
-            "flint_shard",
+    public static final Item ROCK = register(
+            "rock",
             Item::new,
             new Item.Properties()
     );
@@ -38,6 +38,6 @@ public class ModItems {
 
     public static void initialize() {
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS)
-                .register(creativeTab -> creativeTab.accept(FLINT_SHARD));
+                .register(creativeTab -> creativeTab.accept(ROCK));
     }
 }
