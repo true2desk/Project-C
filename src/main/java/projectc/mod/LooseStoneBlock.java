@@ -4,16 +4,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class LooseStoneBlock extends Block {
-
-    public static final EnumProperty<LooseStonePosition> POSITION =
-            EnumProperty.create("position", LooseStonePosition.class);
 
     private static final VoxelShape STONE_1 = Block.box(
             6.5, 0, 7,
@@ -36,6 +31,30 @@ public class LooseStoneBlock extends Block {
             STONE_3
     );
 
+    private static final VoxelShape TOP_LEFT_SHAPE = Shapes.or(
+            Block.box(2.5, 0, 3, 5.5, 1.5, 5),
+            Block.box(3, 0, 2, 4.5, 1, 3),
+            Block.box(3.8, 0, 5, 5.2, 0.7, 6)
+    );
+
+    private static final VoxelShape TOP_RIGHT_SHAPE = Shapes.or(
+            Block.box(10.5, 0, 3, 13.5, 1.5, 5),
+            Block.box(11, 0, 2, 12.5, 1, 3),
+            Block.box(11.8, 0, 5, 13.2, 0.7, 6)
+    );
+
+    private static final VoxelShape BOTTOM_LEFT_SHAPE = Shapes.or(
+            Block.box(2.5, 0, 11, 5.5, 1.5, 13),
+            Block.box(3, 0, 10, 4.5, 1, 11),
+            Block.box(3.8, 0, 13, 5.2, 0.7, 14)
+    );
+
+    private static final VoxelShape BOTTOM_RIGHT_SHAPE = Shapes.or(
+            Block.box(10.5, 0, 11, 13.5, 1.5, 13),
+            Block.box(11, 0, 10, 12.5, 1, 11),
+            Block.box(11.8, 0, 13, 13.2, 0.7, 14)
+    );
+
     public LooseStoneBlock(Properties properties) {
         super(properties);
 
@@ -47,9 +66,15 @@ public class LooseStoneBlock extends Block {
         );
     }
 
+    public static final net.minecraft.world.level.block.state.properties.EnumProperty<LooseStonePosition> POSITION =
+            net.minecraft.world.level.block.state.properties.EnumProperty.create(
+                    "position",
+                    LooseStonePosition.class
+            );
+
     @Override
     protected void createBlockStateDefinition(
-            StateDefinition.Builder<Block, BlockState> builder
+            net.minecraft.world.level.block.state.StateDefinition.Builder<Block, BlockState> builder
     ) {
         builder.add(POSITION);
     }
@@ -61,7 +86,7 @@ public class LooseStoneBlock extends Block {
             BlockPos pos,
             CollisionContext context
     ) {
-        return STONE_SHAPE;
+        return getPositionShape(state);
     }
 
     @Override
@@ -71,6 +96,16 @@ public class LooseStoneBlock extends Block {
             BlockPos pos,
             CollisionContext context
     ) {
-        return STONE_SHAPE;
+        return getPositionShape(state);
+    }
+
+    private static VoxelShape getPositionShape(BlockState state) {
+        return switch (state.getValue(POSITION)) {
+            case TOP_LEFT -> TOP_LEFT_SHAPE;
+            case TOP_RIGHT -> TOP_RIGHT_SHAPE;
+            case BOTTOM_LEFT -> BOTTOM_LEFT_SHAPE;
+            case BOTTOM_RIGHT -> BOTTOM_RIGHT_SHAPE;
+            case MIDDLE -> STONE_SHAPE;
+        };
     }
 }

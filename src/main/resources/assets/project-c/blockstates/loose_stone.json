@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
-      "model": "project-c:block/loose_stone"
+    "position=top_left": {
+      "model": "project-c:block/loose_stone/top_left"
+    },
+    "position=top_right": {
+      "model": "project-c:block/loose_stone/top_right"
+    },
+    "position=bottom_left": {
+      "model": "project-c:block/loose_stone/bottom_left"
+    },
+    "position=bottom_right": {
+      "model": "project-c:block/loose_stone/bottom_right"
+    },
+    "position=middle": {
+      "model": "project-c:block/loose_stone/middle"
     }
   }
 }
