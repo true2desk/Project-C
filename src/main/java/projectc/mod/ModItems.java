@@ -38,6 +38,15 @@ public class ModItems {
 
     public static void initialize() {
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS)
-                .register(creativeTab -> creativeTab.accept(ROCK));
+                .register(creativeTab -> {
+                    creativeTab.accept(ROCK);
+                    creativeTab.accept(SHARP_ROCK);
+                });
     }
+
+    public static final Item SHARP_ROCK = register(
+            "sharp_rock",
+            Item::new,
+            new Item.Properties()
+    );
 }
