@@ -20,6 +20,7 @@ import projectc.mod.resource.ModEntityTypes;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import projectc.mod.resource.LooseStickEntity;
+import projectc.mod.worldgen.ModWorldGeneration;
 
 public class ProjectC implements ModInitializer {
 	public static final String MOD_ID = "project-c";
@@ -35,6 +36,7 @@ public class ProjectC implements ModInitializer {
 		CivCommands.initialize();
 		CivilizationServer.initialize();
 		ModEntityTypes.initialize();
+		ModWorldGeneration.initialize();
 
 		ServerLifecycleEvents.SERVER_STARTED.register(
 				WorldConfiguration::initialize
