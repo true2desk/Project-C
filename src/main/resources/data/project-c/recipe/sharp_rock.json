@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "project-c:rock",
+    "project-c:rock"
+  ],
+  "result": {
+    "id": "project-c:sharp_rock",
+    "count": 1
+  }
+}

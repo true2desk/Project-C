@@ -37,6 +37,7 @@ public class ProjectC implements ModInitializer {
 		CivilizationServer.initialize();
 		ModEntityTypes.initialize();
 		ModWorldGeneration.initialize();
+		KnifeGrassDrops.initialize();
 
 		ServerLifecycleEvents.SERVER_STARTED.register(
 				WorldConfiguration::initialize

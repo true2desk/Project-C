@@ -17,6 +17,24 @@ public class ModItems {
             new Item.Properties()
     );
 
+    public static final Item SHARP_ROCK = register(
+            "sharp_rock",
+            Item::new,
+            new Item.Properties()
+    );
+
+    public static final Item STONE_KNIFE = register(
+            "stone_knife",
+            StoneKnifeItem::new,
+            new Item.Properties()
+    );
+
+    public static final Item PLANT_FIBER = register(
+            "plant_fiber",
+            Item::new,
+            new Item.Properties()
+    );
+
     public static <T extends Item> T register(
             String name,
             java.util.function.Function<Item.Properties, T> itemFactory,
@@ -41,12 +59,8 @@ public class ModItems {
                 .register(creativeTab -> {
                     creativeTab.accept(ROCK);
                     creativeTab.accept(SHARP_ROCK);
+                    creativeTab.accept(STONE_KNIFE);
+                    creativeTab.accept(PLANT_FIBER);
                 });
     }
-
-    public static final Item SHARP_ROCK = register(
-            "sharp_rock",
-            Item::new,
-            new Item.Properties()
-    );
 }
