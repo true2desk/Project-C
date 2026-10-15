@@ -1,7 +1,7 @@
 {
-  "item.project-c.flint_shard": "Flint Shard",
-  "block.project-c.flint_block": "Flint Block",
   "item.project-c.rock": "Rock",
-  "block.project-c.loose_stone": "Loose Stone",
-  "item.project-c.sharp_rock": "Sharp Rock"
+  "item.project-c.sharp_rock": "Sharp Rock",
+  "item.project-c.stone_knife": "Stone Knife",
+  "item.project-c.plant_fiber": "Plant Fiber",
+  "item.project-c.crude_stone_axe": "Crude Stone Axe"
 }

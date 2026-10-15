@@ -21,6 +21,7 @@ import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import projectc.mod.resource.LooseStickEntity;
 import projectc.mod.worldgen.ModWorldGeneration;
+import projectc.mod.ModRecipes;
 
 public class ProjectC implements ModInitializer {
 	public static final String MOD_ID = "project-c";
@@ -38,6 +39,7 @@ public class ProjectC implements ModInitializer {
 		ModEntityTypes.initialize();
 		ModWorldGeneration.initialize();
 		KnifeGrassDrops.initialize();
+		ModRecipes.initialize();
 
 		ServerLifecycleEvents.SERVER_STARTED.register(
 				WorldConfiguration::initialize

@@ -1,0 +1,26 @@
+
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rock": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "project-c:rock"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_rock"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "project-c:sharp_rock"
+    ]
+  }
+}

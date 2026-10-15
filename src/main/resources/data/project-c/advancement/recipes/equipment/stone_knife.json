@@ -1,0 +1,37 @@
+
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sharp_rock": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "project-c:sharp_rock"
+          }
+        ]
+      }
+    },
+    "has_stick": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:stick"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_sharp_rock",
+      "has_stick"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "project-c:stone_knife"
+    ]
+  }
+}

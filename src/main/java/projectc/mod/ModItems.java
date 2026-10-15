@@ -29,6 +29,16 @@ public class ModItems {
             new Item.Properties()
     );
 
+    public static final Item CRUDE_STONE_AXE = register(
+            "crude_stone_axe",
+            Item::new,
+            new Item.Properties().axe(
+                    net.minecraft.world.item.ToolMaterial.WOOD,
+                    6.0f,
+                    -3.2f
+            )
+    );
+
     public static final Item PLANT_FIBER = register(
             "plant_fiber",
             Item::new,
@@ -61,6 +71,7 @@ public class ModItems {
                     creativeTab.accept(SHARP_ROCK);
                     creativeTab.accept(STONE_KNIFE);
                     creativeTab.accept(PLANT_FIBER);
+                    creativeTab.accept(CRUDE_STONE_AXE);
                 });
     }
 }
