@@ -3,7 +3,8 @@
 	"package": "projectc.mod.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"mixins": [
-		"ExampleMixin"
+		"ExampleMixin",
+		"LogToolRequirementMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
