@@ -20,6 +20,18 @@ public class ModEntityTypes {
                             .updateInterval(10)
             );
 
+    public static final EntityType<HumanEntity> HUMAN =
+            register(
+                    ModEntityTypeIds.HUMAN,
+                    EntityType.Builder.of(
+                                    HumanEntity::new,
+                                    MobCategory.CREATURE
+                            )
+                            .sized(0.6f, 1.8f)
+                            .clientTrackingRange(8)
+                            .updateInterval(3)
+            );
+
     private static <T extends net.minecraft.world.entity.Entity> EntityType<T> register(
             net.minecraft.resources.ResourceKey<EntityType<?>> key,
             EntityType.Builder<T> builder

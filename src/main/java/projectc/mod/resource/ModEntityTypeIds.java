@@ -17,4 +17,7 @@ public class ModEntityTypeIds {
                 ProjectC.id(name)
         );
     }
+
+    public static final ResourceKey<EntityType<?>> HUMAN =
+            create("human");
 }

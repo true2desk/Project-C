@@ -16,5 +16,10 @@ public class ProjectCClient implements ClientModInitializer {
 
 		ModelLoadingPlugin.register(context ->
 				new ProjectCModelLoading().initialize(context)		);
+
+		EntityRendererRegistry.register(
+				ModEntityTypes.HUMAN,
+				HumanRenderer::new
+		);
 	}
 }

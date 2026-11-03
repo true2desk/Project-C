@@ -319,7 +319,7 @@ public class CivCommands {
                                                                                                 LongArgumentType.longArg(1)
                                                                                         )
                                                                                         .executes(context -> {
-                                                                                            CommandSourceStack source =
+                                                                                        CommandSourceStack source =
                                                                                                     context.getSource();
 
                                                                                             CivilizationData data =

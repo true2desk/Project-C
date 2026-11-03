@@ -1,27 +1,30 @@
 package projectc.mod;
 
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.resources.Identifier;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.core.BlockPos;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import projectc.mod.civilization.CivCommands;
+import projectc.mod.npc.NpcCommands;
+import projectc.mod.civilization.CalendarCommands;
 import projectc.mod.civilization.CivilizationServer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import projectc.mod.world.WorldConfiguration;
-import projectc.mod.resource.ModEntityTypes;
-import net.fabricmc.fabric.api.event.player.UseBlockCallback;
-import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import projectc.mod.resource.LooseStickEntity;
+import projectc.mod.resource.ModEntityAttributes;
+import projectc.mod.resource.ModEntityTypes;
+import projectc.mod.world.WorldConfiguration;
 import projectc.mod.worldgen.ModWorldGeneration;
-import projectc.mod.ModRecipes;
 
 public class ProjectC implements ModInitializer {
 	public static final String MOD_ID = "project-c";
@@ -40,6 +43,9 @@ public class ProjectC implements ModInitializer {
 		ModWorldGeneration.initialize();
 		KnifeGrassDrops.initialize();
 		ModRecipes.initialize();
+		ModEntityAttributes.initialize();
+		NpcCommands.initialize();
+		CalendarCommands.initialize();
 
 		ServerLifecycleEvents.SERVER_STARTED.register(
 				WorldConfiguration::initialize
@@ -168,5 +174,4 @@ public class ProjectC implements ModInitializer {
 
 	public static Identifier id(String path) {
 		return Identifier.fromNamespaceAndPath(MOD_ID, path);
-	}
-}
+	}}
