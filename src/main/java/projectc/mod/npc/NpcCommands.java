@@ -37,9 +37,13 @@ public final class NpcCommands {
                                                             }
 
                                                             TribeMemberProfile profile = human.getProfile();
+                                                            long age = human.getAge(source.getLevel());
+                                                            HumanLifeStage lifeStage = human.getLifeStage(source.getLevel());
 
                                                             source.sendSuccess(() -> Component.literal(
-                                                                    "Role: " + profile.getRole()
+                                                                    "Age: " + age
+                                                                            + " | Life Stage: " + lifeStage
+                                                                            + " | Role: " + profile.getRole()
                                                                             + " | Traits: " + profile.getPersonalityTraits()
                                                                             + " | Settlement ID: " + profile.getSettlementId()
                                                             ), false);

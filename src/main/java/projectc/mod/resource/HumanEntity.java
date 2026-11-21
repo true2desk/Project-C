@@ -6,9 +6,12 @@ import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.server.level.ServerLevel;
 import projectc.mod.npc.PersonalityTrait;
 import projectc.mod.npc.TribeMemberProfile;
 import projectc.mod.npc.TribeRole;
+import projectc.mod.civilization.calendar.CivilizationCalendar;
+import projectc.mod.npc.HumanLifeStage;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -24,10 +27,31 @@ public class HumanEntity extends PathfinderMob {
 
     public HumanEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
+
+        if (level instanceof ServerLevel serverLevel) {
+            this.birthYear = CivilizationCalendar.getCurrentDate(serverLevel).year();
+        }
     }
+
+    private long birthYear = -1L;
 
     public TribeMemberProfile getProfile() {
         return profile;
+    }
+
+    public long getAge(ServerLevel serverLevel) {
+        long currentYear = CivilizationCalendar.getCurrentDate(serverLevel).year();
+
+        // Give older NPCs without a saved birth year a safe starting year.
+        if (birthYear < 1L) {
+            birthYear = currentYear;
+        }
+
+        return Math.max(0L, currentYear - birthYear);
+    }
+
+    public HumanLifeStage getLifeStage(ServerLevel serverLevel) {
+        return HumanLifeStage.fromAge(getAge(serverLevel));
     }
 
     public void setProfile(TribeMemberProfile profile) {
@@ -51,11 +75,14 @@ public class HumanEntity extends PathfinderMob {
                         .toList()
         );
         output.putLong("settlement_id", profile.getSettlementId());
+        output.putLong("birth_year", birthYear);
     }
 
     @Override
     protected void readAdditionalSaveData(ValueInput input) {
         super.readAdditionalSaveData(input);
+
+        birthYear = input.getLongOr("birth_year", -1L);
 
         TribeRole role;
         try {
