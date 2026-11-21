@@ -1,0 +1,113 @@
+//
+// mobfilter.json5
+//
+// THIS IS THE ADVANCED CONFIGURATION.  SEE mobfilter.simple FOR THE SIMPLER VERSION IF YOU
+// JUST WANT TO FILTER OUT A FEW MOBS.
+//
+// This file controls the spawn filtering rules for mob-filter.  For details, see the docs at:
+//   https://github.com/pcal43/mob-filter/blob/main/docs/advanced-configuration-landing.md
+//
+// Note that this file isn't parsed with a true json5 parser; rather it's parsed with google's gson
+// in lenient mode:
+//   https://javadoc.io/doc/com.google.code.gson/gson/latest/com.google.gson/com/google/gson/JsonParser.html
+//
+//
+// Stuck?   Consider using Chat-GPT or another LLM to generate a config
+// for you.  You'll get much better results if you direct it to the json
+// schema for the config file here:
+//   https://github.com/pcal43/mob-filter/blob/main/docs/mobfilter.schema.json?raw=true
+//
+// Here's an example of a prompt that generates pretty a good result:
+//
+//    Please generate a json config file for the Minecraft mod "Mob Filter."  I
+//    would like to prevent hostile mobs from ever spawning in the overworld above
+//    sea level. I'd also like to prevent silverfish from ever spawning anywhere.
+//    For reference, please fetch the json schema for the config file from this url:
+//      https://github.com/pcal43/mob-filter/blob/main/docs/mobfilter.schema.json?raw=true
+//
+// If your existing config is having problems, you can also upload it to
+// Chat-GPT and ask it to fix it for you.
+//
+// But if the robots are unable to help, you can also ask humans for help
+// on the discord server at:
+//   https://discord.pcal.net
+
+
+// ===========================================================================
+// EXAMPLE 1 - SQUID AREN'T FOUND IN RIVERS
+
+/** DELETE THIS LINE AND THE MATCHING LINE BELOW TO ENABLE THE EXAMPLE
+
+{
+  "rules" : [
+      {
+          "name" : "No freshwater squid!",
+          "what" : "DISALLOW_SPAWN",
+          "when" : {
+              "entityId" : [ "minecraft:squid" ],
+              "biomeId"  : [ "minecraft:river", "minecraft:frozen_river" ]
+          }
+      }
+  ],
+
+  // If you"re having trouble, change this to DEBUG or TRACE
+  // to output diagnostic information to debug.log.
+  "logLevel" : "INFO"
+}
+
+AND ALSO DELETE THIS LINE **/
+
+
+
+// ===========================================================================
+// EXAMPLE 2 - BOX-SHAPED AREA WITH NO HOSTILE MOBS
+
+/** DELETE THIS LINE AND THE MATCHING LINE BELOW TO ENABLE THE EXAMPLE
+
+```
+{
+    "rules" : [
+        {
+            "what" : "DISALLOW_SPAWN",
+            "when" : {
+                "category" : [ "MONSTER" ],
+                "dimensionId" : [ "minecraft:overworld" ],
+                "blockX" : [ -128, 234 ],
+                "blockY" : [ 63, "MAX" ],
+                "blockZ" : [ -321, 512 ]
+            }
+        }
+    ]
+}
+```
+
+AND ALSO DELETE THIS LINE **/
+
+
+
+
+// ===========================================================================
+// EXAMPLE 3 - SECRET COW LEVEL
+
+/** DELETE THIS LINE AND THE MATCHING LINE BELOW TO ENABLE THE EXAMPLE
+
+{
+  "rules": [
+    {
+      "name": "Allow cows...",
+      "what": "ALLOW_SPAWN",
+      "when": {
+        "entityId": [
+          "minecraft:cow"
+        ]
+      }
+    },
+    {
+      "name": "...and nothing else",
+      "what": "DISALLOW_SPAWN",
+      "when": {}
+    }
+  ]
+}
+
+AND ALSO DELETE THIS LINE **/
