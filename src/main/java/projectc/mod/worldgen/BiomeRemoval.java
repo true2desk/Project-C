@@ -12,6 +12,7 @@ public final class BiomeRemoval {
             Identifier.withDefaultNamespace("dark_forest"),
             Identifier.withDefaultNamespace("mushroom_fields"),
             Identifier.withDefaultNamespace("pale_garden"),
+            Identifier.withDefaultNamespace("deep_dark"),
 
             Identifier.fromNamespaceAndPath("terralith", "alpha_islands"),
             Identifier.fromNamespaceAndPath("terralith", "alpha_islands_winter"),
@@ -22,8 +23,11 @@ public final class BiomeRemoval {
             Identifier.fromNamespaceAndPath("terralith", "skylands_spring"),
             Identifier.fromNamespaceAndPath("terralith", "skylands_summer"),
             Identifier.fromNamespaceAndPath("terralith", "skylands_autumn"),
-            Identifier.fromNamespaceAndPath("terralith", "skylands_winter")
-    );
+            Identifier.fromNamespaceAndPath("terralith", "skylands_winter"),
+            Identifier.fromNamespaceAndPath("terralith", "cave/frostfire_caves"),
+            Identifier.fromNamespaceAndPath("terralith", "mirage_isles"),
+            Identifier.fromNamespaceAndPath("terralith", "cloud_forest")
+            );
 
     private BiomeRemoval() {}
 
